@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Page</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://kit.fontawesome.com/32b5a95e49.js" crossorigin="anonymous"></script>
+    <style>
+        html {
+            height: 100%;
+            margin: 0;
+            background-color: rgba(179, 247, 255, 0.24);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0px 0px 40px #000000;
+        }
+
+        .containerBox {
+            height: 520px;
+            border-radius: 50px;
+            position: relative;
+            width: 520px;
+        }
+
+        .innerBox {
+            position: absolute;
+            padding: 0 10px 10px 0;
+            z-index: 40;
+            bottom: 0px;
+            height: 448px;
+            border-radius: 50px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 18px 24px 20px #000e4148, -2px -2px 5px #00000017;
+            width: 99%;
+        }
+
+        .innerBox2 {
+            height: 360px;
+            border-radius: 50px;
+            z-index: 85;
+
+            background-color: rgba(237, 254, 255, 0.667);
+            box-shadow: 15px 15px 10px #d7d6d6;
+            width: 100%;
+            position: relative;
+            text-align: center;
+            padding-top: 86px;
+        }
+
+        .logoBox {
+            width: 120px;
+            height: auto;
+            
+            
+            position: relative;
+            z-index: 55;
+            padding: 0px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 3px 8px 10px #000e4148, 8px 16px 10px #ffffff17;
+
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .field {
+            height: 50px;
+            width: 100%;
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .field input {
+            height: 50px;
+            width: 360px;
+            padding-left: 45px;
+            outline: none;
+            border: none;
+            font-size: 18px;
+            background: #ffffff;
+            color: #595959;
+            border-radius: 25px;
+            box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #ffffff73;
+        }
+
+        .field input:focus {
+            box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #ffffff73;
+        }
+
+        .field span {
+            position: absolute;
+            color: #595959;
+            width: 50px;
+            line-height: 50px;
+            left: 60px;
+            /* Adjust the position of the icon */
+        }
+
+        form a {
+            float: right;
+            margin-right: 60px;
+            padding: 10px;
+            color: blue;
+
+        }
+
+        /* Style for the submit button */
+        button[type="submit"] {
+            background-color: #4efbf09c;
+            /* Green */
+            color: rgb(11, 15, 65);
+            width: 320px;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #ffffff73;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #00e5ff;
+            /* Darker green */
+        }
+
+        .createAcc {
+            margin-top: -20px;
+            color: rgb(11, 15, 65);
+            ;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 80px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="containerBox">
+        <div class="innerBox">
+            <div class="innerBox2">
+                <h1>Login Form</h1>
+                <form id="loginForm" action="/login" method="post">
+                    <div class="field">
+                        <span class="fa fa-envelope"></span>
+                        <input name="email" id="email" type="text" placeholder="Enter your Email">
+                    </div>
+                    <div class="field">
+                        <span class="fa fa-lock"></span>
+                        <input name="password" id="password" type="password" placeholder="Enter Your Password">
+                        <i class="toggle-password fa fa-eye-slash" onclick="togglePasswordVisibility()"></i>
+                    </div>
+                    <a href="/forgetPassword">Forget Password ?</a><br />
+                    <br />
+                    <button type="submit">Login</button>
+                </form><br />
+                <a class="createAcc" href="/createAccount">Don't have Account! Create Account..</a>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        // Function to toggle password visibility
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById("password");
+            var icon = document.querySelector(".toggle-password");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            } else {
+                passwordField.type = "password";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            }
+        }
+
+        // Function to send request with token in headers
+        async function fetchWithToken(url, options) {
+            const token = localStorage.getItem('token');
+            if (token) {
+                options.headers = {
+                    ...options.headers,
+                    'Authorization': `Bearer ${token}`
+                };
+            }
+            return fetch(url, options);
+        }
+
+        // Event listener for form submission
+        document.getElementById('loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            // Get email and password from form inputs
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Send login request
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            // Parse response data
+            const data = await response.json();
+
+            // Handle login response
+            if (response.ok) {
+                // Store token in localStorage
+                const token = data.token;
+            
+                localStorage.setItem('Token', JSON.stringify(token));
+                
+                window.location.href = `/home?token=${token}`;
+                
+            //     fetch('/home', {
+            //         method: 'GET',
+            //         headers: {
+            //             'Authorization': `Bearer ${token}`
+            //         }
+            //     })
+            //         .then(response => {
+            //             console.log(response.data)
+            //             //
+            //         })
+            //         .catch(error => {
+            //             // Handle error
+                  //  });
+            } else {
+                // Display error message
+                alert(data.message);
+            }
+        });
+        
+    </script>
+</body>
+
+</html>

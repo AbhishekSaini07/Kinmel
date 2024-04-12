@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>Bootstrap Example</title>
+    <script src="https://kit.fontawesome.com/32b5a95e49.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .horizontal-view {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent line breaks for horizontal layout */
+}
+
+.vertical-view {
+    overflow-y: auto; /* Enable vertical scrolling */
+    /* Limit the height of the vertical container */
+}
+
+.product-container {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow multiple rows for vertical layout */
+    gap: 10px; /* Add some spacing between product cards */
+    padding: 10px; /* Add padding to the container */
+}
+
+.product {
+    flex: 0 0 calc(33.33% - 20px); /* Set width to 1/3 of container width with gap */
+    border: 1px solid #ccc; /* Add border for visibility */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    padding: 10px; /* Add padding to the product card */
+}
+
+.card {
+    width: 100%; /* Ensure the card fills the container */
+}
+
+.card-img-top {
+    width: 100%; /* Ensure the image fills the card */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Add border radius for rounded corners */
+}
+
+.card-body {
+    padding: 10px; /* Add padding to the card body */
+}
+
+.card-title {
+    margin-bottom: 5px; /* Add margin to separate title from other content */
+}
+
+.card-text {
+    margin-bottom: 5px; /* Add margin to separate text lines */
+}
+.horizontal-view {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    flex-wrap: no-wrap; /* Prevent line breaks for horizontal layout */
+    height: 400px;
+}
+.horizontal-view .product {
+    flex: 0 0 auto; /* Prevent flex items from growing or shrinking */
+    width: 200px; /* Set a fixed width for product cards */
+    border: 1px solid #ccc; /* Add border for visibility */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    padding: 10px; /* Add padding to the product card */
+    font-size: 10px;
+}
+
+.horizontal-view .card {
+    width: 100%; /* Ensure the card fills the container */
+}
+
+.horizontal-view .card-img-top {
+    width: 100%; /* Ensure the image fills the card */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Add border radius for rounded corners */
+}
+
+.horizontal-view .card-body {
+    padding: 10px; /* Add padding to the card body */
+}
+
+.horizontal-view .card-title {
+    margin-bottom: 5px; /* Add margin to separate title from other content */
+}
+
+.horizontal-view .card-text {
+    margin-bottom: 5px; /* Add margin to separate text lines */
+}
+        .logo {
+            height: 52px;
+           
+
+            filter: drop-shadow(3px 8px 5px #00000064);
+        }
+
+        main {
+            background-color: rgb(225, 251, 251);
+            height: 100vh;
+            position: relative;
+            overflow-y: hidden;
+        }
+
+        .nav {
+            padding: 6px;
+            z-index: 10;
+
+        }
+
+        form.nosubmit {
+            border: none;
+            padding: 0;
+            margin: 5px 10px;
+        }
+
+        input.nosubmit {
+            width: 50vw;
+            height: 48px;
+            border: 1px solid #0000001e;
+            border-radius: 15px;
+            display: block;
+            padding: 9px 4px 9px 40px;
+            box-shadow: 3px 8px 5px #0000001e;
+            background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+        }
+
+        .notificationIcon {
+            height: 48px;
+            width: 48px;
+            border-radius: 50%;
+            border: 1px solid #0000001e;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 3px 8px 5px #0000001e;
+
+        }
+
+        .notificationIcon i {
+
+            font-size: 24px;
+
+
+        }
+
+        .userBox {
+            height: 48px;
+            padding: 3px 6px;
+            min-width: 180px;
+            border-radius: 50px;
+            border: 1px solid #0000001e;
+            box-shadow: 3px 8px 5px #0000001e;
+
+        }
+
+        .userIcon {
+
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-family: cursive;
+            font-size: 28px;
+            background-color: rgba(0, 255, 255, 0.514);
+            border: 1px solid #0000001e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+        }
+
+        .userIcon img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+
+        .usernamebox {
+            padding: 0 0 0 5px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100vh;
+            width: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(112, 221, 237, 0.412);
+            box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #ffffff73;
+            /* VS Code dark background color */
+            overflow-x: hidden;
+            padding-top: 20px;
+            padding-left: 10px;
+            transition: width 0.3s;
+            /* Smooth transition */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Suitable font */
+        }
+
+        .sidebar a {
+            padding: 10px 5px 10px 10px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #170f75;
+            /* VS Code light text color */
+            display: block;
+            border-radius: 0 25px 25px 0;
+            /* Rounded corners on the right side */
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
+        /* Active tab */
+        .sidebar a.active {
+
+            /* White background color */
+            color: #1e1e1e;
+            background-color: rgb(225, 251, 251);
+            /* Dark text color */
+            border-radius: 10px 0 0 10px;
+            /* Rounded corners on the left side */
+        }
+
+        /* Main content */
+        .content {
+            margin-left: 200px;
+            height: 86vh;
+            overflow-y: auto;
+            padding: 10px 10px;
+            transition: margin-left 0.3s;
+            /* Smooth transition */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Suitable font */
+        }
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    </style>
+</head>
+
+<body>
+
+
+    <nav class="nav navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img class="logo" src="/images/Kinmel.png" alt="DevDomain"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+                <form class="nosubmit">
+                    <input class="nosubmit" type="search" placeholder="Search...">
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <div class="notificationIcon ">
+                                <i class="fa-solid fa-bell"></i>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <div class="userBox">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="userIcon"><img src='<%=data.photoUrl%>'></div>
+                                        </td>
+                                        <td>
+                                            <div class="usernamebox">
+                                                <%= data.username%>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                            </div>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="sidebar" id="sidebar">
+            <a href="#" class="active" onclick="changeTab(event)"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#" onclick="changeTab(event)"><i class="fa-solid fa-square-pen"></i> Update Account</a>
+            <a href="#" onclick="changeTab(event)"><i class="fa-solid fa-sliders"></i> Setting</a>
+
+        </div>
+
+
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="horizontal-view">
+                <h4>For You</h4>
+                <div class="product-container" id="horizontal"></div>
+            </div>
+        
+            <!-- Vertical View -->
+            <div class="vertical-view">
+                <h4>Explore More Products</h4>
+                <div class="product-container" id="vertical"></div>
+            </div>
+           
+                    </div>
+
+
+
+                    <!-- JavaScript to toggle sidebar and change active tab -->
+
+
+
+    </main>
+    <script>
+        const jwtToken = localStorage.getItem('Token');
+       
+       
+        
+      
+
+       
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "80px";
+                document.querySelector('.content').style.marginLeft = '80px';
+            } else {
+                sidebar.style.width = "200px";
+                document.querySelector('.content').style.marginLeft = '200px';
+            }
+        }
+        function fetchProducts() {
+    fetch('/products')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(products => {
+            console.log(products);
+            renderProducts(products, 'vertical'); // Render products vertically by default
+            renderProducts(products, 'horizontal'); // Render products horizontally
+        })
+        .catch(error => {
+            console.error('Error fetching products:', error);
+        });
+}
+
+// Function to generate HTML for a single product
+function generateProductHTML(product) {
+    return `
+        <div class="card">
+            <img src="/images/km2.png" class="card-img-top" alt="Product Image">
+            <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text">${product.description}</p>
+                <p class="card-text">Price: ${product.price}</p>
+                <p class="card-text">Quantity: ${product.quantity}</p>
+                <p class="card-text">Category: ${product.category}</p>
+            </div>
+        </div>
+    `;
+}
+
+// Function to render products in the product container
+function renderProducts(products, orientation) {
+    const productContainer = document.getElementById(`${orientation}`);
+    productContainer.innerHTML = ''; // Clear existing content
+    products.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product');
+        productElement.innerHTML = generateProductHTML(product);
+        productContainer.appendChild(productElement);
+    });
+}
+
+// Call fetchProducts function to fetch and render products
+fetchProducts();
+
+
+
+
+
+        
+    </script>
+
+
+    <!-- End Example Code -->
+</body>
+
+</html>

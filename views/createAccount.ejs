@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registration Form</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://kit.fontawesome.com/32b5a95e49.js" crossorigin="anonymous"></script>
+    <style>
+        html {
+            height: 100%;
+            margin: 0;
+            background-color: rgba(179, 247, 255, 0.24);
+            display: flex;
+            padding: 80px 0 120px 0;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0px 0px 40px #000000;
+        }
+
+        .containerBox {
+            height: 862px;
+            border-radius: 50px;
+            position: relative;
+            width: 720px;
+        }
+
+        .innerBox {
+            position: absolute;
+            padding: 0 10px 10px 0;
+            z-index: 40;
+            bottom: 0px;
+            height: 782px;
+            border-radius: 50px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 18px 24px 20px #000e4148, -2px -2px 5px #00000017;
+            width: 99%;
+
+        }
+
+        .innerBox2 {
+            height: 692px;
+            border-radius: 50px;
+            z-index: 85;
+            background-color: rgba(237, 254, 255, 0.667);
+            box-shadow: 15px 15px 10px #d7d6d6;
+            width: 100%;
+            position: relative;
+            text-align: center;
+            padding-top: 86px;
+        }
+
+        .logoBox {
+            height: 140px;
+            width: 140px;
+            border-radius: 50%;
+            position: relative;
+            z-index: 55;
+            padding: 0px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 3px 8px 10px #000e4148, 8px 16px 10px #ffffff17;
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .field {
+            height: 50px;
+            width: 100%;
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .field input {
+            height: 50px;
+            width: 560px;
+            padding-left: 45px;
+            outline: none;
+            border: none;
+            font-size: 18px;
+            background: #ffffff;
+            color: #595959;
+            border-radius: 25px;
+            box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #ffffff73;
+        }
+
+        .field input:focus {
+            box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #ffffff73;
+        }
+        #photoInput{
+            height: 50px;
+            width: 560px;
+            margin: 20px 0px 0px -15px;
+            outline: none;
+            border: none;
+            font-size: 18px;
+            color: #595959;
+            
+
+        }
+
+        .field span {
+            position: absolute;
+            color: #595959;
+            width: 50px;
+            line-height: 50px;
+            left: 60px;
+            /* Adjust the position of the icon */
+        }
+
+        /* Style for the submit button */
+        button[type="submit"] {
+            background-color: #4efbf09c;
+            /* Green */
+            color: rgb(11, 15, 65);
+            width: 320px;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #ffffff73;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #00e5ff;
+            /* Darker green */
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 80px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="containerBox">
+       
+        <div class="innerBox">
+            <div class="innerBox2">
+                <h1>Registration Form</h1>
+                <form action="/register" method="post" enctype="multipart/form-data" >
+                    <!-- enctype="multipart/form-data" for file upload -->
+                    <div class="field">
+                        <span class="fa fa-user"></span>
+                        <input type="text" name="name" placeholder="Enter your Name" >
+                    </div>
+                    <div class="field">
+                        <span class="fa fa-user"></span>
+                        <input type="text" name="username" placeholder="Enter your Username" >
+                    </div>
+                    <div class="field">
+                        <span class="fa fa-envelope"></span>
+                        <input type="text" name="email" placeholder="Enter your Email" name="email">
+                    </div>
+                    <div class="field">
+                        <span class="fa fa-lock"></span>
+                        <input name="password" id="password" type="password" placeholder="Enter Your Password">
+                        <i class="toggle-password fa fa-eye-slash" onclick="togglePasswordVisibility()"></i>
+                        <!-- Eye icon to toggle password visibility -->
+                    </div>
+                    <div class="field">
+                        <span class="fa fa-lock"></span>
+                        <input name="confirmPassword" id="confirmPassword" type="password"
+                            placeholder="Confirm Password">
+                        <i class="toggle-password fa fa-eye-slash" onclick="togglePasswordVisibility()"></i>
+                        <!-- Eye icon to toggle password visibility -->
+                    </div>
+                    <div class="field">
+                        <span class="fa fa-phone"></span>
+                        <input type="text" name="phoneNumber" placeholder="Enter your Phone Number" >
+                    </div>
+
+                    <div class="field">
+                        <span class="fa fa-info-circle"></span>
+                        <input type="text" name="profileText" placeholder="Enter your Profile Text">
+                    </div>
+                    <div class="field">
+                        <span class="fa fa-male"></span>
+                        <input type="text" name="gender" placeholder="Enter your Gender">
+                    </div>
+                    <div class="photofield">
+                        <input type="file" name="pic" id="photoInput" >
+                        <!-- File input for photo -->
+
+                    </div>
+
+                    <!-- Additional fields can be added as needed -->
+
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById("password");
+            var cpasswordField = document.getElementById("confirmPassword");
+            var icon = document.querySelector(".toggle-password");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            } else {
+                passwordField.type = "password";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            }
+            if (cpasswordField.type === "password") {
+                cpasswordField.type = "text";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            } else {
+                cpasswordField.type = "password";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            }
+        }
+
+        function validateForm() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+
+</html>

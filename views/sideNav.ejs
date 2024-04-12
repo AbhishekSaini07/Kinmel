@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VS Code Style Sidebar</title>
+  <!-- Font Awesome CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #00d9ff7c; /* VS Code dark background color */
+      overflow-x: hidden;
+      padding-top: 20px;
+      transition: width 0.3s; /* Smooth transition */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Suitable font */
+    }
+
+    .sidebar a {
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #000000; /* VS Code light text color */
+      display: block;
+      border-radius: 0 25px 25px 0; /* Rounded corners on the right side */
+    }
+
+    .sidebar a i {
+      margin-right: 10px;
+    }
+
+    /* Active tab */
+    .sidebar a.active {
+      background-color: #ffffff; /* White background color */
+      color: #1e1e1e; /* Dark text color */
+      border-radius: 25px 0 0 25px; /* Rounded corners on the left side */
+    }
+
+    /* Main content */
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+      transition: margin-left 0.3s; /* Smooth transition */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Suitable font */
+    }
+
+    /* Hamburger menu icon */
+  
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 80px; /* Adjust the width for smaller screens */
+      }
+
+      .sidebar a {
+        padding: 10px;
+        text-align: center;
+        border-radius: 25px; /* Rounded corners for all tabs */
+      }
+
+      .sidebar a i {
+        margin-right: 0;
+      }
+
+      .content {
+        margin-left: 80px;
+      }
+
+      
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <a href="#" class="active" onclick="changeTab(event)"><i class="fas fa-folder"></i> Explorer</a>
+  <a href="#" onclick="changeTab(event)"><i class="fas fa-search"></i> Search</a>
+  <a href="#" onclick="changeTab(event)"><i class="fas fa-code-branch"></i> Source Control</a>
+  <a href="#" onclick="changeTab(event)"><i class="fas fa-puzzle-piece"></i> Extensions</a>
+</div>
+
+
+
+<!-- Main content -->
+<div class="content">
+  <h2>VS Code Style Sidebar Example</h2>
+  <p>This example demonstrates how to create a sidebar similar to the one in VS Code.</p>
+</div>
+
+<!-- JavaScript to toggle sidebar and change active tab -->
+<script>
+  function toggleSidebar() {
+    var sidebar = document.getElementById("sidebar");
+    if (sidebar.style.width === "250px") {
+      sidebar.style.width = "80px";
+      document.querySelector('.content').style.marginLeft = '80px';
+    } else {
+      sidebar.style.width = "250px";
+      document.querySelector('.content').style.marginLeft = '250px';
+    }
+  }
+
+  // Function to change active tab
+  function changeTab(event) {
+    var links = document.querySelectorAll('.sidebar a');
+    links.forEach(function(link) {
+      link.classList.remove('active');
+    });
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

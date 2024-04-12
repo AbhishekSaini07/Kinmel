@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>Bootstrap Example</title>
+    <script src="https://kit.fontawesome.com/32b5a95e49.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .logo {
+            height: 72px;
+            width: 72px;
+
+            filter: drop-shadow(3px 8px 5px #00000064);
+        }
+
+        main {
+            background-color: rgb(225, 251, 251);
+            height: 100vh;
+            position: relative;
+            overflow-y: hidden;
+        }
+
+        .nav {
+            padding: 6px;
+            z-index: 10;
+
+        }
+
+        form.nosubmit {
+            border: none;
+            padding: 0;
+            margin: 5px 10px;
+        }
+
+        input.nosubmit {
+            width: 50vw;
+            height: 48px;
+            border: 1px solid #0000001e;
+            border-radius: 15px;
+            display: block;
+            padding: 9px 4px 9px 40px;
+            box-shadow: 3px 8px 5px #0000001e;
+            background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+        }
+
+        .notificationIcon {
+            height: 48px;
+            width: 48px;
+            border-radius: 50%;
+            border: 1px solid #0000001e;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 3px 8px 5px #0000001e;
+
+        }
+
+        .notificationIcon i {
+
+            font-size: 24px;
+
+
+        }
+
+        .userBox {
+            height: 48px;
+            padding: 3px 6px;
+            min-width: 180px;
+            border-radius: 50px;
+            border: 1px solid #0000001e;
+            box-shadow: 3px 8px 5px #0000001e;
+
+        }
+
+        .userIcon {
+
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-family: cursive;
+            font-size: 28px;
+            background-color: rgba(0, 255, 255, 0.514);
+            border: 1px solid #0000001e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+        }
+
+        .userIcon img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+
+        .usernamebox {
+            padding: 0 0 0 5px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100vh;
+            width: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(112, 221, 237, 0.412);
+            box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #ffffff73;
+            /* VS Code dark background color */
+            overflow-x: hidden;
+            padding-top: 20px;
+            padding-left: 10px;
+            transition: width 0.3s;
+            /* Smooth transition */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Suitable font */
+        }
+
+        .sidebar a {
+            padding: 10px 5px 10px 10px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #170f75;
+            /* VS Code light text color */
+            display: block;
+            border-radius: 0 25px 25px 0;
+            /* Rounded corners on the right side */
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
+        /* Active tab */
+        .sidebar a.active {
+
+            /* White background color */
+            color: #1e1e1e;
+            background-color: rgb(225, 251, 251);
+            /* Dark text color */
+            border-radius: 10px 0 0 10px;
+            /* Rounded corners on the left side */
+        }
+
+        /* Main content */
+        .content {
+            margin-left: 200px;
+            padding: 10px 10px;
+            transition: margin-left 0.3s;
+            /* Smooth transition */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Suitable font */
+        }
+
+        .container {
+            background-color: rgba(86, 55, 55, 0.103);
+            padding: 10px;
+
+        }
+
+        .profileWidget {
+            height: 240px;
+            width: 100%;
+            position: relative;
+            margin: 10px 0px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 0px;
+            text-align: center;
+            border: 1px solid #0000001e;
+            box-shadow: inset 0px 0px 5px #0000003c;
+        }
+
+        .profileWidget table {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .profileWidget .profilebg {
+            background-color: rgba(112, 221, 237, 0.412);
+            height: 60px;
+
+            width: 100%;
+            border-radius: 20px 20px 0px 0px;
+        }
+
+        .profileWidget .profiledata {
+
+            height: 158px;
+            padding-top: 44px;
+            width: 100%;
+            border-radius: 0px 0px 20px 20px;
+        }
+
+        .profileWidget .profilepic {
+            height: 80px;
+            width: 80px;
+            font-size: 44px;
+            position: absolute;
+            top: 20px;
+            left: 39%;
+            border-radius: 50%;
+            color: #ffffffe7;
+        }
+
+        .profilepic img {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+        }
+
+        .postWidget {
+            height: 402px;
+            width: 100%;
+            position: relative;
+            padding: 20px;
+            margin: 10px 0px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #0000001e;
+            box-shadow: inset 0px 0px 5px #0000003c;
+        }
+
+        /* Style post widget */
+
+
+        .postWidget form {
+            display: flex;
+            margin-top: 10px;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .postWidget form input[type="text"],
+        .postWidget form textarea {
+            margin-bottom: 10px;
+            /* Add spacing between input fields */
+            padding: 10px;
+            /* Increase padding for better input field visibility */
+            border: 1px solid #ced4da;
+            /* Use a lighter border color */
+            border-radius: 10px;
+            /* Adjust border radius */
+        }
+
+        .postWidget form textarea {
+            resize: vertical;
+            /* Allow vertical resizing of textarea */
+        }
+
+        .postWidget form .buttonContainer {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            bottom: 20px;
+        }
+
+        .postWidget form .buttonContainer button {
+            padding: 10px 80px;
+            /* Increase padding for button */
+            border: none;
+            border-radius: 10px;
+            /* Adjust border radius */
+            background-color: #007bff38;
+            /* Use a primary color for the button */
+            color: #1e0b6b;
+            /* Use white text color */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .postWidget form .buttonContainer button:hover {
+            background-color: #007bff9c;
+            /* Darker shade on hover */
+        }
+
+        .postWidget form #uploadIcon {
+            margin-bottom: 10px;
+            cursor: pointer;
+            color: #007bff85;
+            /* Use primary color for the upload icon */
+        }
+
+        .postWidget form #uploadIcon:hover {
+            color: #0056b3;
+            /* Darker shade on hover */
+        }
+
+
+
+
+        .contactWidget {
+            height: 378px;
+            width: 100%;
+            margin: 10px 0px;
+            padding: 20px 10px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #0000001e;
+            box-shadow: inset 0px 0px 5px #0000003c;
+        }
+
+        .contactWidgetContent {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px 0 20px 0;
+            overflow: auto;
+
+        }
+
+
+        /* Add scrollbar styling */
+        .contactWidgetContent::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .contactWidgetContent::-webkit-scrollbar-thumb {
+            background-color: #cac7c7;
+            border-radius: 4px;
+        }
+
+        .contactWidgetContent::-webkit-scrollbar-thumb:hover {
+            background-color: #a4a4a4;
+        }
+
+
+        .instagram-widget {
+            width: 100%;
+            /* Adjusted width calculation */
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .user-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-info {
+            flex: 1;
+            text-align: start;
+        }
+
+        .user-info h3 {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .user-info p {
+            margin: 3px 0;
+            font-size: 12px;
+        }
+
+        .follow-button {
+            background-color: #3897f0;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: auto;
+        }
+
+        .followed {
+            background-color: #ddd;
+            color: #555;
+            cursor: not-allowed;
+        }
+
+
+
+
+
+        .feedWidget {
+            height: 258px;
+            width: 340px;
+            margin: 10px 0px;
+            padding: 20px 10px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #0000001e;
+            box-shadow: inset 0px 0px 5px #0000003c;
+        }
+
+        .feedWidgetContent {
+            width: 300px;
+            height: 184px;
+            display: flex;
+            justify-content: flex-start;
+            /* Adjusted to start from the left */
+            align-items: center;
+            /* Center items vertically */
+            padding: 5px 10px;
+
+            overflow-x: auto;
+            /* Enable horizontal scrolling */
+            white-space: nowrap;
+        }
+
+        /* Add scrollbar styling */
+        .feedWidgetContent::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .feedWidgetContent::-webkit-scrollbar-thumb {
+            background-color: #cac7c7;
+            border-radius: 4px;
+        }
+
+        .feedWidgetContent::-webkit-scrollbar-thumb:hover {
+            background-color: #a4a4a4;
+        }
+
+
+
+        .companyFeedWidget {
+            width: 140px;
+            height: 162px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            display: inline-block;
+            border: 1px solid #0000001e;
+            box-shadow: inset 0px 0px 5px #0000003c;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+
+        .company-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .company-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 5px;
+            border: 1px solid black;
+        }
+
+        .company-info {
+            text-align: center;
+        }
+
+        .company-info h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .company-info p {
+            margin: 2px 0;
+            font-size: 10px;
+        }
+
+        .feedWidget .follow-button {
+            background-color: #3897f0;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 3px 5px;
+            width: 100%;
+
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .followed {
+            background-color: #ddd;
+            color: #555;
+            cursor: not-allowed;
+        }
+
+
+        .mainWidget {
+            height: 658px;
+            width: 100%;
+            margin: 10px 0px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #0000001e;
+            box-shadow: inset 0px 0px 5px #0000003c;
+            overflow: hidden;
+        }
+
+        .mainWidgetContent {
+            max-height: 550px;
+            padding: 0 0 30px 0;
+            overflow: auto;
+        }
+
+        /* Add scrollbar styling */
+        .mainWidgetContent::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .mainWidgetContent::-webkit-scrollbar-thumb {
+            background-color: #cac7c7;
+            border-radius: 4px;
+        }
+
+        .mainWidgetContent::-webkit-scrollbar-thumb:hover {
+            background-color: #a4a4a4;
+        }
+
+
+
+
+
+
+
+        .post-widget {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px 0;
+
+            margin-bottom: 20px;
+            width: 90%;
+            /* Set initial width */
+            max-width: 600px;
+            /* Set maximum width */
+            margin: 20px auto;
+            /* Center the post */
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            text-align: start;
+        }
+
+        .user-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-info {
+            flex-grow: 1;
+
+        }
+
+        .username {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .time {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .post-text {
+            margin-bottom: 15px;
+            text-align: start;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .post-media img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+
+        .post-actions button {
+            background-color: transparent;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .post-actions button i {
+            margin-right: 5px;
+        }
+
+        .post-actions button:hover {
+            color: #007bff;
+        }
+
+
+
+
+
+
+
+        .barrier {
+            width: 5px;
+            height: 50px;
+            border-radius: 5px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #00000027;
+        }
+
+
+        /* Hamburger menu icon */
+
+
+        @media screen and (max-width: 768px) {
+
+            .sidebar {
+                width: 80px;
+                /* Adjust the width for smaller screens */
+            }
+
+            .sidebar a {
+                padding: 10px;
+                text-align: center;
+                border-radius: 25px;
+                /* Rounded corners for all tabs */
+            }
+
+            .sidebar a i {
+                margin-right: 0;
+            }
+
+            .content {
+                margin-left: 80px;
+            }
+
+
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <nav class="nav navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img class="logo" src="/images/devDomainlogo.png" alt="DevDomain"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+                <form class="nosubmit">
+                    <input class="nosubmit" type="search" placeholder="Search...">
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <div class="notificationIcon ">
+                                <i class="fa-solid fa-bell"></i>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <div class="userBox">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="userIcon"><img src='<%=data.photoUrl%>'></div>
+                                        </td>
+                                        <td>
+                                            <div class="usernamebox">
+                                                <%= data.username%>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                            </div>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="sidebar" id="sidebar">
+            <a href="#" class="active" onclick="changeTab(event)"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#" onclick="changeTab(event)"><i class="fa-solid fa-square-pen"></i> Update Account</a>
+            <a href="#" onclick="changeTab(event)"><i class="fa-solid fa-sliders"></i> Setting</a>
+
+        </div>
+
+
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid text-center">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="profileWidget">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div class="profilebg"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="profiledata">
+                                                    <h4>
+                                                        <%= data.name %>
+                                                    </h4>
+                                                    <h6>
+                                                        <%= data.profileText %>
+                                                    </h6>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-5"
+                                                            style="text-align: end; color: #0000008b; padding: 10px 0px;">
+                                                            404 Followers</div>
+                                                        <div class="col-sm-2">
+                                                            <div class="barrier"></div>
+                                                        </div>
+
+                                                        <div class="col-sm-5"
+                                                            style="text-align: start; color: #0000008b; padding: 10px 0px;">
+                                                            92 following</div>
+                                                    </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="profilepic"><img src='<%=data.photoUrl%>'></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="postWidget">
+
+                                    <h4>Create new post</h4>
+                                    <form id="postForm" action="/createPost" method="post" enctype="multipart/form-data">
+                                        <input id="titleInput" name="postTitle" type="text" placeholder="Enter title">
+                                        <textarea id= "contentInput" name="postText" placeholder="Enter content"></textarea>
+                                        <div id="imagePreview"></div>
+                                        <input type="file" name="pic" id="imageInput" style="display: none;">
+
+                                        <div class="buttonContainer">
+                                            <div class="notificationIcon" id="uploadIcon">
+                                                <i class="fas fa-upload" id="uploadTrigger"></i>
+                                            </div>&emsp;&emsp;
+                                            <button type="submit" >Submit</button>
+
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mainWidget">
+                            <h4>News Feed</h4>
+                            <div class="mainWidgetContent" id="postContainer"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="contactWidget">
+                                    <h4> Add Contants</h4>
+                                    <div class="contactWidgetContent">
+                                        <div id="instagram-widget" class="widget-row">
+                                            <!-- Widgets will be generated dynamically -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="feedWidget">
+                                        <h4>New Feed</h4>
+                                        <div class="feedWidgetContent">
+                                            <div id="company-feed" class="widget-row">
+                                                <!-- Company widgets will be generated dynamically -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    </main>
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "80px";
+                document.querySelector('.content').style.marginLeft = '80px';
+            } else {
+                sidebar.style.width = "200px";
+                document.querySelector('.content').style.marginLeft = '200px';
+            }
+        }
+
+        // Function to change active tab
+        function changeTab(event) {
+            var links = document.querySelectorAll('.sidebar a');
+            links.forEach(function (link) {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        
+
+    
+         
+
+      
+       
+ 
+    </script>
+
+
+    <!-- End Example Code -->
+</body>
+
+</html>
